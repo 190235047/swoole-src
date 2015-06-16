@@ -255,7 +255,7 @@ int swSocket_listen(int type, char *host, int port, int backlog)
     }
     //reuse
     option = 1;
-    setsockopt(sock, SOL_SOCKET, SO_REUSEADDR, &option, sizeof(int));
+    setsockopt(sock, SOL_SOCKET, SO_REUSEADDR, &option, sizeof(int));//setsockopt设置socket状态
 
     //unix socket
     if (type == SW_SOCK_UNIX_DGRAM || type == SW_SOCK_UNIX_STREAM)
@@ -301,6 +301,6 @@ int swSocket_listen(int type, char *host, int port, int backlog)
         swWarn("listen(%d) failed. Error: %s[%d]", backlog, strerror(errno), errno);
         return SW_ERR;
     }
-    swSetNonBlock(sock);
+    swSetNonBlock(sock);//设置阻塞、非阻塞模式
     return sock;
 }

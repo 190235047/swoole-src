@@ -26,12 +26,12 @@ int swMutex_create(swLock *lock, int use_in_process)
     int ret;
     bzero(lock, sizeof(swLock));
     lock->type = SW_MUTEX;
-    pthread_mutexattr_init(&lock->object.mutex.attr);
+    pthread_mutexattr_init(&lock->object.mutex.attr);//初始化互斥锁属性对象
     if (use_in_process == 1)
     {
-        pthread_mutexattr_setpshared(&lock->object.mutex.attr, PTHREAD_PROCESS_SHARED);
+        pthread_mutexattr_setpshared(&lock->object.mutex.attr, PTHREAD_PROCESS_SHARED);//设置互斥锁的范围
     }
-    if ((ret = pthread_mutex_init(&lock->object.mutex._lock, &lock->object.mutex.attr)) < 0)
+    if ((ret = pthread_mutex_init(&lock->object.mutex._lock, &lock->object.mutex.attr)) < 0) //动态方式创建互斥锁
     {
         return SW_ERR;
     }

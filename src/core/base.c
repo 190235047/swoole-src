@@ -636,7 +636,7 @@ void swoole_ioctl_set_block(int sock, int nonblock)
     }
 }
 
-void swoole_fcntl_set_block(int sock, int nonblock)
+void swoole_fcntl_set_block(int sock, int nonblock) //设置阻塞、非阻塞模式
 {
     int opts, ret;
     do

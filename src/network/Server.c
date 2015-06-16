@@ -594,7 +594,7 @@ int swServer_start(swServer *serv)
     }
     else
     {
-        ret = swServer_start_proxy(serv);
+        ret = swServer_start_proxy(serv);//这里面有accept
     }
 
     if (ret < 0)
@@ -690,7 +690,7 @@ int swServer_create(swServer *serv)
     //单进程单线程模式
     if (serv->factory_mode == SW_MODE_SINGLE)
     {
-        return swReactorProcess_create(serv);
+        return swReactorProcess_create(serv); //里面会创建 serv->factory
     }
     else
     {

@@ -638,7 +638,7 @@ static void php_swoole_onStart(swServer *serv)
 
     args[0] = &zserv;
     zval_add_ref(&zserv);
-
+    //调用户空间函数
     if (call_user_function_ex(EG(function_table), NULL, php_sw_callback[SW_SERVER_CB_onStart], &retval, 1, args, 0, NULL TSRMLS_CC) == FAILURE)
     {
         php_error_docref(NULL TSRMLS_CC, E_WARNING, "swoole_server: onStart handler error");
@@ -1785,7 +1785,7 @@ PHP_FUNCTION(swoole_server_start)
     serv->onReceive = php_swoole_onReceive;
     serv->ptr2 = zobject;
 
-    ret = swServer_create(serv);
+    ret = swServer_create(serv);//里面会创建serv->factory
     if (ret < 0)
     {
         php_error_docref(NULL TSRMLS_CC, E_ERROR, "create server failed. Error: %s", sw_error);
